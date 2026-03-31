@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nivesh Somanna MB — Digital Marketing Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --orange: #FF6B00;
+    --orange-dim: #cc5500;
+    --dark: #0A0A0A;
+    --dark2: #111111;
+    --dark3: #161616;
+    --dark4: #1E1E1E;
+    --card: #141414;
+    --border: #2a2a2a;
+    --text: #E8E8E8;
+    --muted: #888;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--orange); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .2s, height .2s;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1.5px solid var(--orange); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: left .08s, top .08s;
+    opacity: .5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,10,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); letter-spacing: 2px; }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Space Mono', monospace; font-size: .72rem; color: var(--muted);
+    text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); }
+  .mobile-menu {
+    display: none; position: fixed; top: 62px; left: 0; right: 0;
+    background: rgba(10,10,10,.97); border-bottom: 1px solid var(--border);
+    padding: 2rem 5%; flex-direction: column; gap: 1.5rem; z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Space Mono', monospace; font-size: .85rem; color: var(--muted); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+  .mobile-menu a:hover { color: var(--orange); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;margin-top: 75px;
+    padding: 0 5%; position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: .25;
+  }
+  .hero-noise {
+    position: absolute; inset: 0; opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+  .hero-accent {
+    position: absolute; right: -8%; top: 50%; transform: translateY(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: var(--orange); opacity: .04; filter: blur(80px);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 850px; }
+  .hero-tag {
+    font-family: 'Space Mono', monospace; font-size: .72rem; color: var(--orange);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .hero-tag::before { content: ''; display: inline-block; width: 32px; height: 2px; background: var(--orange); }
+  .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 10vw, 9rem); line-height: .9; color: var(--white); letter-spacing: 2px; }
+  .hero-name span { color: var(--orange); }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 3vw, 2.4rem); color: var(--muted); letter-spacing: 4px; margin-top: .8rem; }
+  .hero-desc { max-width: 540px; color: #aaa; line-height: 1.7; margin-top: 1.6rem; font-size: .95rem; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.4rem; }
+  .btn-primary {
+    background: var(--orange); color: var(--dark); padding: .85rem 2rem;
+    font-family: 'Space Mono', monospace; font-size: .75rem; letter-spacing: 2px;
+    text-transform: uppercase; text-decoration: none; font-weight: 700;
+    transition: background .2s, transform .2s; display: inline-flex; align-items: center; gap: .5rem;
+  }
+  .btn-primary:hover { background: var(--orange-dim); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--border); color: var(--text); padding: .85rem 2rem;
+    font-family: 'Space Mono', monospace; font-size: .75rem; letter-spacing: 2px;
+    text-transform: uppercase; text-decoration: none;
+    transition: border-color .2s, color .2s, transform .2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 4rem; padding-top: 2.4rem; border-top: 1px solid var(--border); }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--orange); line-height: 1; }
+  .stat-label { font-size: .75rem; color: var(--muted); letter-spacing: 1px; margin-top: .3rem; text-transform: uppercase; }
+
+  /* TICKER */
+  .ticker-wrap { background: var(--orange); overflow: hidden; padding: .55rem 0; white-space: nowrap; }
+  .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
+  .ticker-inner span { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--dark); letter-spacing: 3px; padding: 0 2rem; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTIONS */
+  section { padding: 7rem 5%; }
+  .section-tag { font-family: 'Space Mono', monospace; font-size: .7rem; color: var(--orange); letter-spacing: 3px; text-transform: uppercase; display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+  .section-tag::before { content: '//'; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); letter-spacing: 2px; line-height: 1; }
+  .section-title span { color: var(--orange); }
+
+  /* ABOUT */
+  #about { background: var(--dark2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; align-items: start; }
+  .about-text p { color: #aaa; line-height: 1.8; margin-bottom: 1.2rem; font-size: .95rem; }
+  .about-text p strong { color: var(--orange); font-weight: 600; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
+  .tag { background: var(--dark4); border: 1px solid var(--border); color: var(--muted); padding: .35rem .85rem; font-family: 'Space Mono', monospace; font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; transition: border-color .2s, color .2s; }
+  .tag:hover { border-color: var(--orange); color: var(--orange); }
+  .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .info-block { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; position: relative; overflow: hidden; }
+  .info-block::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--orange); }
+  .info-label { font-family: 'Space Mono', monospace; font-size: .65rem; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: .5rem; }
+  .info-value { color: var(--text); font-size: .95rem; line-height: 1.6; }
+
+  /* SKILLS */
+  #skills { background: var(--dark); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 4rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; transition: border-color .25s, transform .25s; }
+  .skill-card:hover { border-color: var(--orange); transform: translateY(-4px); }
+  .skill-card-icon { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; color: var(--orange); font-size: 1.1rem; transition: border-color .25s; }
+  .skill-card:hover .skill-card-icon { border-color: var(--orange); }
+  .skill-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--white); margin-bottom: 1rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .skill-pill { background: var(--dark4); color: #bbb; padding: .3rem .7rem; font-size: .72rem; border: 1px solid var(--border); font-family: 'Space Mono', monospace; transition: border-color .2s, color .2s; }
+  .skill-card:hover .skill-pill { border-color: #3a2a1a; color: var(--orange); }
+
+  /* EXPERIENCE */
+  #experience { background: var(--dark3); }
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; }
+  .exp-card { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; transition: border-color .25s; }
+  .exp-card:hover { border-color: var(--orange); }
+  .exp-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+  .exp-card:hover::after { transform: scaleX(1); }
+  .exp-type-label { position: absolute; top: 1.5rem; right: 1.5rem; font-family: 'Space Mono', monospace; font-size: .6rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; background: var(--dark4); border: 1px solid var(--border); padding: .25rem .6rem; }
+  .exp-company-badge { display: inline-block; background: var(--dark4); border: 1px solid var(--orange); color: var(--orange); padding: .3rem .9rem; font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.2rem; }
+  .exp-role { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--white); line-height: 1.1; }
+  .exp-company { font-family: 'Space Mono', monospace; font-size: .72rem; color: var(--muted); letter-spacing: 1px; margin-top: .4rem; }
+  .exp-period { font-size: .8rem; color: var(--orange); margin-top: .8rem; font-family: 'Space Mono', monospace; }
+  .exp-desc { margin-top: 1.4rem; color: #aaa; font-size: .88rem; line-height: 1.7; }
+  .exp-bullets { list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: .6rem; }
+  .exp-bullets li { color: #999; font-size: .85rem; padding-left: 1.2rem; position: relative; line-height: 1.6; }
+  .exp-bullets li::before { content: '▸'; color: var(--orange); position: absolute; left: 0; }
+
+  /* PROJECTS */
+  #projects { background: var(--dark2); }
+  .projects-intro { color: #aaa; font-size: .95rem; line-height: 1.7; max-width: 640px; margin-top: 1rem; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: border-color .25s, transform .25s; }
+  .project-card:hover { border-color: var(--orange); transform: translateY(-5px); }
+  .mock-screen { width: 100%; aspect-ratio: 16/9; background: var(--dark4); position: relative; overflow: hidden; }
+  .mock-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mock-label { position: absolute; bottom: .8rem; right: .8rem; background: var(--orange); color: var(--dark); font-family: 'Space Mono', monospace; font-size: .6rem; padding: .25rem .6rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; z-index: 2; }
+  .project-body { padding: 1.8rem; }
+  .project-card.featured { grid-column: 1 / -1; }
+  .project-card.featured .project-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .project-company { font-family: 'Space Mono', monospace; font-size: .62rem; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: .6rem; }
+  .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--white); line-height: 1.1; }
+  .project-desc { color: #999; font-size: .84rem; line-height: 1.65; margin-top: .8rem; }
+  .project-metrics { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+  .metric-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--orange); }
+  .metric-key { font-size: .65rem; color: var(--muted); letter-spacing: 1px; font-family: 'Space Mono', monospace; text-transform: uppercase; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .ptag { background: var(--dark4); border: 1px solid var(--border); color: #888; font-family: 'Space Mono', monospace; font-size: .6rem; padding: .25rem .6rem; }
+
+  /* SOLVED BANNER */
+  .solved-banner { background: var(--dark3); border: 1px solid var(--orange); padding: 1.8rem 2rem; margin-top: 1.4rem; position: relative; }
+  .solved-banner::before { content: 'CASE STUDY'; position: absolute; top: .85rem; right: 1.2rem; font-family: 'Space Mono', monospace; font-size: .58rem; color: var(--orange); letter-spacing: 2px; }
+  .solved-banner-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--white); margin-bottom: .7rem; }
+  .solved-banner p { color: #999; font-size: .82rem; line-height: 1.7; }
+  .solved-steps { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+  .solved-step { display: flex; align-items: center; gap: .4rem; background: var(--dark4); border: 1px solid var(--border); padding: .35rem .8rem; font-family: 'Space Mono', monospace; font-size: .62rem; color: var(--muted); }
+  .solved-step i { color: var(--orange); font-size: .6rem; }
+
+  /* UPLOAD */
+  .upload-strip { margin-top: 2rem; background: var(--card); border: 1px solid var(--border); padding: 1.4rem 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .upload-strip-label { font-family: 'Space Mono', monospace; font-size: .65rem; color: var(--muted); letter-spacing: 1px; flex: 1; min-width: 200px; }
+  .upload-strip-label strong { color: var(--orange); display: block; margin-bottom: .3rem; letter-spacing: 2px; }
+  .uploaded-gallery { display: none; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .uploaded-img { aspect-ratio: 4/3; object-fit: cover; border: 1px solid var(--border); width: 100%; transition: border-color .2s; }
+  .uploaded-img:hover { border-color: var(--orange); }
+
+  /* TOOLS */
+  #tools { background: var(--dark); }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 4rem; }
+  .tool-item { background: var(--card); border: 1px solid var(--border); padding: 1.5rem 1rem; text-align: center; transition: border-color .2s, transform .2s; }
+  .tool-item:hover { border-color: var(--orange); transform: translateY(-3px); }
+  .tool-icon-wrap { width: 38px; height: 38px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto .8rem; color: var(--orange); font-size: 1rem; transition: border-color .2s; }
+  .tool-item:hover .tool-icon-wrap { border-color: var(--orange); }
+  .tool-name { font-family: 'Space Mono', monospace; font-size: .62rem; color: var(--muted); letter-spacing: .5px; text-transform: uppercase; line-height: 1.4; }
+
+  /* CERTS */
+  #certs { background: var(--dark2); }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 4rem; }
+  .cert-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; transition: border-color .2s; }
+  .cert-card:hover { border-color: var(--orange); }
+  .cert-icon-wrap { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--orange); font-size: .9rem; transition: border-color .2s; }
+  .cert-card:hover .cert-icon-wrap { border-color: var(--orange); }
+  .cert-name { color: var(--text); font-size: .88rem; line-height: 1.4; font-weight: 500; padding-top: .2rem; }
+
+  /* EDUCATION */
+  #education { background: var(--dark); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 4rem; }
+  .edu-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; }
+  .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--orange); }
+  .edu-degree { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--white); }
+  .edu-school { color: var(--muted); font-size: .82rem; margin-top: .4rem; font-family: 'Space Mono', monospace; }
+  .edu-period { color: var(--orange); font-size: .75rem; margin-top: .6rem; font-family: 'Space Mono', monospace; }
+  .edu-score { display: inline-block; margin-top: .8rem; background: var(--dark4); border: 1px solid var(--border); color: var(--orange); font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; padding: .2rem .8rem; letter-spacing: 2px; }
+
+  /* CONTACT */
+  #contact { background: var(--dark3); text-align: center; }
+  .contact-sub { color: var(--muted); font-size: .95rem; max-width: 480px; margin: 1rem auto 3rem; line-height: 1.7; }
+  .contact-cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+  .contact-card { background: var(--card); border: 1px solid var(--border); padding: 2rem 2.5rem; text-align: center; text-decoration: none; min-width: 180px; transition: border-color .2s, transform .2s; }
+  .contact-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+  .contact-icon-wrap { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto .9rem; color: var(--orange); font-size: 1.1rem; transition: border-color .2s; }
+  .contact-card:hover .contact-icon-wrap { border-color: var(--orange); }
+  .contact-card-label { font-family: 'Space Mono', monospace; font-size: .62rem; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: .4rem; }
+  .contact-card-value { color: var(--text); font-size: .82rem; word-break: break-all; }
+
+  /* FOOTER */
+  footer { background: var(--dark); border-top: 1px solid var(--border); padding: 2rem 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--white); letter-spacing: 2px; }
+  .footer-logo span { color: var(--orange); }
+  .footer-copy { font-family: 'Space Mono', monospace; font-size: .62rem; color: var(--muted); letter-spacing: 1px; }
+
+  /* BAR CHART */
+  .bar-chart-mock { width: 100%; height: 100%; padding: 1rem; display: flex; align-items: flex-end; gap: 6px; }
+  .bar { flex: 1; border-radius: 2px 2px 0 0; animation: growBar 1.2s ease both; transform-origin: bottom; }
+  @keyframes growBar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width: 900px) {
+    .about-grid, .exp-grid, .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card.featured .project-body { grid-template-columns: 1fr; }
+  }
+  @media(max-width: 700px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+  @media(max-width: 480px) {
+    section { padding: 5rem 5%; }
+    .hero-ctas { flex-direction: column; align-items: flex-start; }
+    .contact-cards { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NIVESH<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#experience" onclick="toggleMenu()">Experience</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#tools" onclick="toggleMenu()">Tools</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Performance Marketer &amp; Growth Strategist</div>
+    <h1 class="hero-name">NIVESH<span>SOMANNA</span></h1>
+    <div class="hero-title">Digital Marketing Specialist</div>
+    <p class="hero-desc">
+      2+ years turning ad spend into qualified leads across Google, Meta, LinkedIn &amp; X.
+      I fix broken campaigns, build funnels that convert, and let data do the talking.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> View Projects</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">2+</div><div class="stat-label">Years Experience</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">Ad Platforms</div></div>
+      <div><div class="stat-num">6&rarr;0</div><div class="stat-label">Dead Months Fixed</div></div>
+      <div><div class="stat-num">&uarr;ROI</div><div class="stat-label">Every Campaign</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Google Ads</span><span>&bull;</span><span>Meta Ads</span><span>&bull;</span>
+    <span>LinkedIn Ads</span><span>&bull;</span><span>SEO</span><span>&bull;</span>
+    <span>Performance Marketing</span><span>&bull;</span><span>Lead Generation</span><span>&bull;</span>
+    <span>CPL Optimisation</span><span>&bull;</span><span>Funnel Analysis</span><span>&bull;</span>
+    <span>Power BI</span><span>&bull;</span><span>HubSpot CRM</span><span>&bull;</span>
+    <span>Google Analytics</span><span>&bull;</span><span>A/B Testing</span><span>&bull;</span>
+    <span>Google Ads</span><span>&bull;</span><span>Meta Ads</span><span>&bull;</span>
+    <span>LinkedIn Ads</span><span>&bull;</span><span>SEO</span><span>&bull;</span>
+    <span>Performance Marketing</span><span>&bull;</span><span>Lead Generation</span><span>&bull;</span>
+    <span>CPL Optimisation</span><span>&bull;</span><span>Funnel Analysis</span><span>&bull;</span>
+    <span>Power BI</span><span>&bull;</span><span>HubSpot CRM</span><span>&bull;</span>
+    <span>Google Analytics</span><span>&bull;</span><span>A/B Testing</span><span>&bull;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-tag">Who I Am</div>
+  <h2 class="section-title">ABOUT <span>ME</span></h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm a <strong>results-driven Digital Marketing professional</strong> based in Bengaluru, Karnataka, with 2+ years of hands-on experience in performance marketing and client management.</p>
+      <p>My core strength is <strong>fixing what's broken</strong>. At TeamHome, I inherited Google Ads campaigns that had generated zero leads for 6 months. Through deep keyword research, phrase-match restructuring, audience overhauls, and smart budget reallocation &mdash; I got them generating qualified construction leads consistently.</p>
+      <p>Before going in-house, I worked at <strong>LDCB (Logo Design Company Bangalore)</strong>, a full-service digital agency where I managed marketing for multiple client brands across industries. That agency background gives me a broad, client-facing perspective that makes me sharper as an in-house marketer.</p>
+      <p>I back every decision with data &mdash; Excel, Power BI, SQL, and Python are my analytical toolkit. <strong>Great marketing is equal parts creative and analytical.</strong></p>
+      <div class="about-tags">
+        <span class="tag">Bengaluru, KA</span>
+        <span class="tag">English</span>
+        <span class="tag">Kannada</span>
+        <span class="tag">Hindi</span>
+        <span class="tag">B.E. Computer Science</span>
+        <span class="tag">CGPA 8.06</span>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="info-block">
+        <div class="info-label">Current Role</div>
+        <div class="info-value">Digital Marketing Specialist @ TeamHome Pvt. Ltd.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Specialisation</div>
+        <div class="info-value">Performance Marketing &middot; Lead Generation &middot; Funnel Optimisation</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Contact</div>
+        <div class="info-value">niveshsomannamb@gmail.com<br>+91 99023 16127</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Education</div>
+        <div class="info-value">B.E. Computer Science &mdash; AMC Engineering College (2023) &middot; CGPA 8.06</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">What I Bring</div>
+  <h2 class="section-title">SKILL<span>SET</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+      <div class="skill-card-title">Paid Advertising</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Google Ads</span><span class="skill-pill">Meta Ads</span>
+        <span class="skill-pill">LinkedIn Ads</span><span class="skill-pill">X Ads</span>
+        <span class="skill-pill">SEM / PPC</span><span class="skill-pill">Retargeting</span>
+        <span class="skill-pill">A/B Testing</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <div class="skill-card-title">Analytics &amp; Data</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Google Analytics</span><span class="skill-pill">Power BI</span>
+        <span class="skill-pill">MS Excel</span><span class="skill-pill">SQL</span>
+        <span class="skill-pill">Python</span><span class="skill-pill">Tag Manager</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon"><i class="fa-solid fa-crosshairs"></i></div>
+      <div class="skill-card-title">Lead Generation</div>
+      <div class="skill-pills">
+        <span class="skill-pill">CPL Optimisation</span><span class="skill-pill">Funnel Analysis</span>
+        <span class="skill-pill">Lead Qualification</span><span class="skill-pill">HubSpot CRM</span>
+        <span class="skill-pill">Solid Performer</span><span class="skill-pill">Cold Email</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <div class="skill-card-title">SEO &amp; Content</div>
+      <div class="skill-pills">
+        <span class="skill-pill">On-page SEO</span><span class="skill-pill">Keyword Research</span>
+        <span class="skill-pill">Content Strategy</span><span class="skill-pill">Content Writing</span>
+        <span class="skill-pill">Backlink Building</span><span class="skill-pill">WordPress</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon"><i class="fa-solid fa-display"></i></div>
+      <div class="skill-card-title">Web &amp; Design</div>
+      <div class="skill-pills">
+        <span class="skill-pill">HTML / CSS / JS</span><span class="skill-pill">React.js</span>
+        <span class="skill-pill">Bootstrap</span><span class="skill-pill">Landing Pages</span>
+        <span class="skill-pill">Figma</span><span class="skill-pill">Canva</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon"><i class="fa-solid fa-users"></i></div>
+      <div class="skill-card-title">Soft Skills</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Client Management</span><span class="skill-pill">Team Leadership</span>
+        <span class="skill-pill">Communication</span><span class="skill-pill">Problem Solving</span>
+        <span class="skill-pill">Cold Calling</span><span class="skill-pill">Strategic Thinking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">Where I've Worked</div>
+  <h2 class="section-title">EXPERI<span>ENCE</span></h2>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <span class="exp-type-label">IN-HOUSE</span>
+      <div class="exp-company-badge">TeamHome Pvt. Ltd.</div>
+      <div class="exp-role">Digital Marketing<br>Specialist</div>
+      <div class="exp-company">Bengaluru, Karnataka</div>
+      <div class="exp-period">Oct 2025 &mdash; Present</div>
+      <p class="exp-desc">In-house performance marketer for a residential construction company. Sole owner of the full digital marketing function &mdash; from strategy to execution.</p>
+      <ul class="exp-bullets">
+        <li>Managed Google, Meta &amp; LinkedIn Ads with strict focus on CPL, CAC &amp; ROAS metrics</li>
+        <li>Rebuilt broken Google Ads campaigns that had zero leads for 6 months &mdash; restored lead pipeline</li>
+        <li>Executed audience targeting, keyword restructuring, and funnel optimisation</li>
+        <li>Designed &amp; tested ad creatives, posters, and performance copy</li>
+        <li>Built high-converting landing pages and tracked conversion metrics via Google Analytics</li>
+        <li>Implemented SEO &amp; content marketing strategies to grow organic traffic</li>
+        <li>Planned marketing calendars, growth campaigns &amp; managed social media channels</li>
+        <li>Coordinated with sales team to track lead quality, meeting rates, and drop-offs</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <span class="exp-type-label">AGENCY</span>
+      <div class="exp-company-badge">LDCB &mdash; Logo Design Co. Bangalore</div>
+      <div class="exp-role">Web Developer &amp;<br>Project Co-ordinator</div>
+      <div class="exp-company">Bengaluru, Karnataka</div>
+      <div class="exp-period">March 2024 &mdash; July 2025</div>
+      <p class="exp-desc">Full-service digital agency &mdash; managed web development and digital marketing for multiple client brands across various industries simultaneously.</p>
+      <ul class="exp-bullets">
+        <li>Developed responsive websites (HTML, CSS, Bootstrap, JavaScript, React.js) for agency clients</li>
+        <li>Built a React-based internal server platform for the company</li>
+        <li>Managed Meta Ads, Google Analytics &amp; Instagram marketing for client brands</li>
+        <li>Executed SEO optimisation strategies across multiple client websites</li>
+        <li>Used Python to extract leads and client data from Excel sheets</li>
+        <li>Monitored website performance and optimised load times and code efficiency</li>
+        <li>Communicated with clients directly to upsell and expand services</li>
+        <li>Coordinated multiple projects simultaneously across design, dev, and marketing teams</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">What I've Built &amp; Fixed</div>
+  <h2 class="section-title">PROJ<span>ECTS</span></h2>
+  <p class="projects-intro">Real campaigns, real problems, real results. Here's how I've applied strategy, data, and creativity to deliver outcomes.</p>
+
+  
+  <div id="screenshotGallery" class="uploaded-gallery"></div>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock1">
+        <img src="/assets/1.png" alt="">
+        <div class="mock-label">TeamHome &middot; Google Ads Revival</div>
+      </div>
+      <div class="project-body">
+        <div>
+          <div class="project-company">TeamHome Pvt. Ltd. &mdash; In-House</div>
+          <div class="project-title">REVIVING DEAD GOOGLE ADS &mdash; 6 MONTHS ZERO LEADS FIXED</div>
+          <p class="project-desc">Inherited Google Ads campaigns that had produced zero qualified leads for 6 consecutive months. Budget was being spent but nothing was converting. Conducted a full account audit, rebuilt keyword strategy from scratch, and fixed every layer of the campaign.</p>
+          <div class="solved-banner">
+            <div class="solved-banner-title">How I Fixed It</div>
+            <p>Campaigns ran broad-match keywords with no negative lists, attracting renters not buyers. Landing pages had no clear CTA and form questions were too generic, attracting spam. Rebuilt every layer from keyword selection to post-submission tracking.</p>
+            <div class="solved-steps">
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Phrase &amp; Exact Match Keywords</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Negative Keyword Lists Built</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Location Targeting Tightened</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Budget Reallocated to Top Performers</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Landing Page Rebuilt</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Lead Form Restructured</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Bid Strategy Switched</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> A/B Tested Ad Copy</div>
+              <div class="solved-step"><i class="fa-solid fa-check"></i> Full Funnel Tracked via GA4</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="project-metrics">
+            <div class="metric"><div class="metric-val">0&rarr;&check;</div><div class="metric-key">Lead Flow Restored</div></div>
+            <div class="metric"><div class="metric-val">&darr;CPL</div><div class="metric-key">Cost Per Lead</div></div>
+            <div class="metric"><div class="metric-val">&uarr;ROAS</div><div class="metric-key">Return On Spend</div></div>
+            <div class="metric"><div class="metric-val">&darr;Spam</div><div class="metric-key">Fake Lead Rate</div></div>
+          </div>
+          <div class="project-tags" style="margin-top:1.2rem;">
+            <span class="ptag">Google Ads</span><span class="ptag">Keyword Research</span>
+            <span class="ptag">Phrase Match</span><span class="ptag">Negative Keywords</span>
+            <span class="ptag">Budget Optimisation</span><span class="ptag">Landing Page</span>
+            <span class="ptag">GA4</span><span class="ptag">Lead Qualification</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- META -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock2"><img src="/assets/3.png" alt=""><div class="mock-label">TeamHome &middot; Meta Ads</div></div>
+      <div class="project-body">
+        <div class="project-company">TeamHome Pvt. Ltd. &mdash; In-House</div>
+        <div class="project-title">META ADS LEAD CAMPAIGN &mdash; CONSTRUCTION AUDIENCE</div>
+        <p class="project-desc">Built and managed Facebook &amp; Instagram lead generation campaigns targeting high-intent residential construction prospects. Developed custom audience segments, look-alike audiences, and retargeting layers to reduce CPL and improve lead quality.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">&uarr;Quality</div><div class="metric-key">Lead Quality</div></div>
+          <div class="metric"><div class="metric-val">&darr;CPL</div><div class="metric-key">Cost Per Lead</div></div>
+          <div class="metric"><div class="metric-val">3x</div><div class="metric-key">Audience Layers</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">Meta Business Manager</span><span class="ptag">Lookalike Audiences</span>
+          <span class="ptag">Retargeting</span><span class="ptag">Creative Testing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO (Google Search Console) -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock3"><img src="/assets/4.png" alt=""><div class="mock-label">TeamHome &middot; Google Search Console</div></div>
+      <div class="project-body">
+        <div class="project-company">TeamHome Pvt. Ltd. &mdash; In-House</div>
+        <div class="project-title">GOOGLE CONSOLE SEO — ON-PAGE & OFF-PAGE</div>
+        <p class="project-desc">Managed Google Search Console and SEO for TeamHome's website. Delivered on-page optimisation, technical fixes, and off-page backlink work to improve search rankings and organic traffic.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">&uarr;Organic</div><div class="metric-key">Search Traffic</div></div>
+          <div class="metric"><div class="metric-val">&uarr;Impressions</div><div class="metric-key">SERP Visibility</div></div>
+          <div class="metric"><div class="metric-val">&uarr;Links</div><div class="metric-key">Backlink Growth</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">Google Search Console</span><span class="ptag">On-page SEO</span>
+          <span class="ptag">Off-page SEO</span><span class="ptag">Technical SEO</span>
+          <span class="ptag">Keyword Research</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LANDING PAGES -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock4"><img src="/assets/5.png" alt=""><div class="mock-label">TeamHome &middot; Landing Pages</div></div>
+      <div class="project-body">
+        <div class="project-company">TeamHome Pvt. Ltd. &mdash; In-House</div>
+        <div class="project-title">HIGH-CONVERTING LANDING PAGES &amp; FUNNELS</div>
+        <p class="project-desc">Designed and built dedicated landing pages for each campaign. Restructured lead forms to ask qualifying questions upfront, cutting fake/low-intent lead submissions. Set up full funnel tracking via Google Analytics &amp; Tag Manager.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">&uarr;CVR</div><div class="metric-key">Conversion Rate</div></div>
+          <div class="metric"><div class="metric-val">&darr;Spam</div><div class="metric-key">Junk Leads</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">Landing Pages</span><span class="ptag">Google Tag Manager</span>
+          <span class="ptag">Conversion Tracking</span><span class="ptag">Form Optimisation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LDCB MULTI-CLIENT -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock5"><img src="/assets/2.png" alt="Multi-client campaigns"><div class="mock-label">LDCB Agency · Multi-Client</div></div>
+      <div class="project-body">
+        <div class="project-company">LDCB (Logo Design Company Bangalore) &mdash; Agency</div>
+        <div class="project-title">MULTI-CLIENT SOCIAL MEDIA &amp; META ADS MANAGEMENT</div>
+        <p class="project-desc">Managed social media marketing and Meta Ads for multiple LDCB agency clients simultaneously. Each client had unique audiences, budgets, and KPIs. Coordinated campaigns, reported results, and optimised based on live performance data across brands.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">Multi</div><div class="metric-key">Client Brands</div></div>
+          <div class="metric"><div class="metric-val">&uarr;Reach</div><div class="metric-key">Organic + Paid</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">Meta Ads</span><span class="ptag">Instagram Marketing</span>
+          <span class="ptag">Client Management</span><span class="ptag">Reporting</span><span class="ptag">Content Planning</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LDCB SEO -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock6"><img src="/assets/7.png" alt="SEO optimisation"><div class="mock-label">LDCB Agency · SEO</div></div>
+      <div class="project-body">
+        <div class="project-company">LDCB (Logo Design Company Bangalore) &mdash; Agency</div>
+        <div class="project-title">SEO OPTIMISATION ACROSS CLIENT WEBSITES</div>
+        <p class="project-desc">Executed SEO strategies for multiple agency client websites &mdash; on-page optimisation, technical SEO audits, keyword research, and content improvements. Used Google Analytics to track organic growth and iterate based on traffic data.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">&uarr;Organic</div><div class="metric-key">Traffic</div></div>
+          <div class="metric"><div class="metric-val">&uarr;Rankings</div><div class="metric-key">Keyword Positions</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">On-page SEO</span><span class="ptag">Technical SEO</span>
+          <span class="ptag">Google Analytics</span><span class="ptag">Content Strategy</span><span class="ptag">WordPress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LDCB WEB DEV -->
+    <div class="project-card reveal">
+      <div class="mock-screen" id="mock7"><img src="/assets/6.png" alt="Web development projects"><div class="mock-label">LDCB Agency · Web Development</div></div>
+      <div class="project-body">
+        <div class="project-company">LDCB (Logo Design Company Bangalore) &mdash; Agency</div>
+        <div class="project-title">RESPONSIVE WEBSITES FOR AGENCY CLIENTS</div>
+        <p class="project-desc">Developed responsive, performance-optimised websites for LDCB agency clients using HTML, CSS, Bootstrap, and JavaScript. Also built a React.js internal server platform. Optimised page load times and ensured cross-device compatibility throughout.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">React</div><div class="metric-key">Internal Platform</div></div>
+          <div class="metric"><div class="metric-val">&uarr;Speed</div><div class="metric-key">Load Times</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">HTML / CSS</span><span class="ptag">JavaScript</span>
+          <span class="ptag">React.js</span><span class="ptag">Bootstrap</span><span class="ptag">Performance Optimisation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LDCB PYTHON -->
+    <div class="project-card reveal">
+      <!-- <div class="mock-screen" id="mock8"><div class="mock-label">LDCB Agency &middot; Data &amp; Automation</div></div> -->
+      <div class="project-body">
+        <div class="project-company">LDCB (Logo Design Company Bangalore) &mdash; Agency</div>
+        <div class="project-title">PYTHON LEAD EXTRACTION &amp; DATA PIPELINE</div>
+        <p class="project-desc">Built Python scripts to extract, clean, and organise lead and client data from Excel sheets. Automated repetitive data tasks that previously took hours, freeing the team to focus on outreach and follow-ups rather than manual data wrangling.</p>
+        <div class="project-metrics">
+          <div class="metric"><div class="metric-val">Auto</div><div class="metric-key">Data Extraction</div></div>
+          <div class="metric"><div class="metric-val">&darr;Hours</div><div class="metric-key">Manual Work</div></div>
+        </div>
+        <div class="project-tags">
+          <span class="ptag">Python</span><span class="ptag">Excel Automation</span>
+          <span class="ptag">Data Cleaning</span><span class="ptag">Lead Data</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-tag">My Stack</div>
+  <h2 class="section-title">TOOLS &amp; <span>PLATFORMS</span></h2>
+  <div class="tools-grid">
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-google"></i></div><div class="tool-name">Google Ads Manager</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-meta"></i></div><div class="tool-name">Meta Business Manager</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-linkedin"></i></div><div class="tool-name">LinkedIn Campaign Manager</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-tags"></i></div><div class="tool-name">Google Tag Manager</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-chart-line"></i></div><div class="tool-name">Google Analytics GA4</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-h"></i></div><div class="tool-name">HubSpot CRM</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-database"></i></div><div class="tool-name">Solid Performer CRM</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-chart-pie"></i></div><div class="tool-name">Power BI</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-table"></i></div><div class="tool-name">MS Excel</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-python"></i></div><div class="tool-name">Python</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-server"></i></div><div class="tool-name">SQL</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-figma"></i></div><div class="tool-name">Figma</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-solid fa-pen-nib"></i></div><div class="tool-name">Canva / Photopea</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-wordpress"></i></div><div class="tool-name">WordPress</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-react"></i></div><div class="tool-name">React.js</div></div>
+    <div class="tool-item reveal"><div class="tool-icon-wrap"><i class="fa-brands fa-bootstrap"></i></div><div class="tool-name">Bootstrap</div></div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-tag">Credentials</div>
+  <h2 class="section-title">CERTIFI<span>CATIONS</span></h2>
+  <div class="certs-grid">
+    <div class="cert-card reveal"><div class="cert-icon-wrap"><i class="fa-solid fa-trophy"></i></div><div class="cert-name">Campaign Manager 360</div></div>
+    <div class="cert-card reveal"><div class="cert-icon-wrap"><i class="fa-brands fa-python"></i></div><div class="cert-name">Python with AI &amp; AI for Techies</div></div>
+    <div class="cert-card reveal"><div class="cert-icon-wrap"><i class="fa-solid fa-chart-column"></i></div><div class="cert-name">Power BI &mdash; SimpliLearn</div></div>
+    <div class="cert-card reveal"><div class="cert-icon-wrap"><i class="fa-solid fa-code"></i></div><div class="cert-name">Full Stack Web Development &mdash; Kodnest</div></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-tag">Academic Background</div>
+  <h2 class="section-title">EDUCA<span>TION</span></h2>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-degree">Bachelor of Engineering &mdash; Computer Science</div>
+      <div class="edu-school">AMC Engineering College, Bengaluru</div>
+      <div class="edu-period">Aug 2019 &mdash; July 2023</div>
+      <div class="edu-score">CGPA: 8.06</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">Pre-University &mdash; PCMC</div>
+      <div class="edu-school">Mahesh PU College</div>
+      <div class="edu-period">June 2017 &mdash; March 2019</div>
+      <div class="edu-score">79.5%</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Let's Talk</div>
+  <h2 class="section-title">GET IN <span>TOUCH</span></h2>
+  <p class="contact-sub">Looking for a performance marketer who can hit the ground running? Let's connect and talk about how I can drive measurable results for your brand.</p>
+  <div class="contact-cards">
+    <a href="mailto:niveshsomannamb@gmail.com" class="contact-card">
+      <div class="contact-icon-wrap"><i class="fa-solid fa-envelope"></i></div>
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">niveshsomannamb@gmail.com</div>
+    </a>
+    <a href="tel:+919902316127" class="contact-card">
+      <div class="contact-icon-wrap"><i class="fa-solid fa-phone"></i></div>
+      <div class="contact-card-label">Phone</div>
+      <div class="contact-card-value">+91 99023 16127</div>
+    </a>
+    <a href="https://linkedin.com" target="_blank" class="contact-card">
+      <div class="contact-icon-wrap"><i class="fa-brands fa-linkedin-in"></i></div>
+      <div class="contact-card-label">LinkedIn</div>
+      <div class="contact-card-value">Nivesh Somanna MB</div>
+    </a>
+    <div class="contact-card">
+      <div class="contact-icon-wrap"><i class="fa-solid fa-location-dot"></i></div>
+      <div class="contact-card-label">Location</div>
+      <div class="contact-card-value">Bengaluru, Karnataka</div>
+    </div>
+  </div>
+  <a href="mailto:niveshsomannamb@gmail.com" class="btn-primary">
+    <i class="fa-solid fa-paper-plane"></i> Send Me a Message
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">NIVESH<span>.</span></div>
+  <div class="footer-copy">&copy; 2025 Nivesh Somanna MB &middot; Digital Marketing Specialist &middot; Bengaluru</div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  });
+
+  // HAMBURGER
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  // SCROLL REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  // BAR CHARTS
+  const barData = [
+    [10, 8, 5, 3, 2, 1, 0, 0, 5, 14, 28, 42],
+    [20, 18, 22, 15, 10, 28, 35, 30, 40, 45, 52, 60],
+    [5, 8, 12, 18, 22, 30, 28, 35, 40, 48, 55, 60],
+    [60, 55, 48, 40, 35, 50, 62, 70, 75, 80, 88, 95],
+    [30, 35, 28, 40, 45, 50, 55, 48, 60, 65, 70, 78],
+    [10, 15, 18, 22, 28, 35, 40, 45, 52, 58, 65, 72],
+    [40, 42, 45, 50, 55, 52, 60, 65, 70, 72, 75, 80],
+    [80, 78, 85, 88, 90, 88, 92, 95, 92, 96, 98, 99],
+  ];
+  for (let i = 1; i <= 8; i++) {
+    const c = document.getElementById('bars' + i);
+    if (!c) continue;
+    const d = barData[i - 1];
+    const max = Math.max(...d);
+    d.forEach((v, idx) => {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      const col = idx % 3 === 0 ? '#FF6B00' : idx % 3 === 1 ? '#cc5500' : '#ff9944';
+      bar.style.cssText = `height:${(v/max)*85}%;background:${col};opacity:${0.45+(v/max)*0.55};animation-delay:${idx*0.06}s`;
+      c.appendChild(bar);
+    });
+  }
+
+  // SCREENSHOT UPLOAD
+  function handleScreenshots(e) {
+    const g = document.getElementById('screenshotGallery');
+    g.style.display = 'grid';
+    Array.from(e.target.files).forEach(file => {
+      const r = new FileReader();
+      r.onload = ev => {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.className = 'uploaded-img';
+        img.title = file.name;
+        g.appendChild(img);
+      };
+      r.readAsDataURL(file);
+    });
+  }
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
